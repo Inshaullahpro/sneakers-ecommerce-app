@@ -1,6 +1,19 @@
 import { useState } from 'react';
 import './App.css';
 
+// 1. All Image Imports from src/assets
+import p1 from './assets/image-product-1.jpg';
+import p2 from './assets/image-product-2.jpg';
+import p3 from './assets/image-product-3.jpg';
+import p4 from './assets/image-product-4.jpg';
+
+import t1 from './assets/image-product-1-thumbnail.jpg';
+import t2 from './assets/image-product-2-thumbnail.jpg';
+import t3 from './assets/image-product-3-thumbnail.jpg';
+import t4 from './assets/image-product-4-thumbnail.jpg';
+
+import avatarImg from './assets/image-avatar.png';
+
 function App() {
   const [activeThumb, setActiveThumb] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -10,11 +23,12 @@ function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // 2. Using imported image variables in array
   const images = [
-    { main: '/images/image-product-1.jpg', thumb: '/images/image-product-1-thumbnail.jpg' },
-    { main: '/images/image-product-2.jpg', thumb: '/images/image-product-2-thumbnail.jpg' },
-    { main: '/images/image-product-3.jpg', thumb: '/images/image-product-3-thumbnail.jpg' },
-    { main: '/images/image-product-4.jpg', thumb: '/images/image-product-4-thumbnail.jpg' },
+    { main: p1, thumb: t1 },
+    { main: p2, thumb: t2 },
+    { main: p3, thumb: t3 },
+    { main: p4, thumb: t4 },
   ];
 
   const handleNextImage = () => setActiveThumb((prev) => (prev + 1) % images.length);
@@ -24,7 +38,6 @@ function App() {
   const handlePrevLightbox = () => setLightboxIndex((prev) => (prev - 1 + images.length) % images.length);
 
   const openLightbox = () => {
-    // Only open lightbox on desktop screens
     if (window.innerWidth > 768) {
       setLightboxIndex(activeThumb);
       setIsLightboxOpen(true);
@@ -80,7 +93,7 @@ function App() {
                   ) : (
                     <div className="cart-items">
                       <div className="cart-item-row">
-                        <img src="/images/image-product-1-thumbnail.jpg" alt="Item" className="cart-item-thumb" />
+                        <img src={t1} alt="Item" className="cart-item-thumb" />
                         <div className="cart-item-details">
                           <p>Fall Limited Edition Sneakers</p>
                           <p>$125.00 x {cartCount} <span className="total-price">${125 * cartCount}.00</span></p>
@@ -94,7 +107,7 @@ function App() {
               </div>
             )}
 
-            <img src="/images/image-avatar.png" alt="Avatar" className="avatar" />
+            <img src={avatarImg} alt="Avatar" className="avatar" />
           </div>
         </header>
 
